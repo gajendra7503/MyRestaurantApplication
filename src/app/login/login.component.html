@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+<div class="card me-2" id="login">
+    <h5 class="card-header">Login Form</h5>
+    <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="Loginsub()">
+                 <div class="col mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" formControlName="email" class="form-control" placeholder="Enter your email address"
+                    [ngClass]="email"  (keydown.space)="$event.preventDefault();"  maxlength="50"/>
+                    <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback"> -->
+                        <div class="text-danger" *ngIf="emailValidateMessage == 'invalid'">
+                            Invalid email id
+                        </div>
+                        <div class="text-danger" *ngIf="emailValidateMessage == 'required'">
+                            Email id is mandatory
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="col mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="{{ showPassword ? 'text' : 'password' }}" formControlName="password" class="form-control" placeholder="Enter your password" [ngClass]="{ 'is-invalid': submitted && log['password'].errors }" />
+                        <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                            <i class="bi bi-eye{{ showPassword ? '-slash' : '' }}"></i>
+                        </button>
+                    </div>
+                    <div *ngIf="submitted && log['password'].errors" class="invalid-feedback">
+                        <div *ngIf="log['password'].errors['required']">Password is required</div>
+                        <div *ngIf="log['password'].errors['minlength']">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                
+                <div >
+                    <!-- <re-captcha (resolved)="checkCaptcha($event)"
+              name="recaptchaReactive"ngModel siteKey="6LcrXHkkAAAAAMdTaA05b5AQgtwN4g6sjuTvA1wN">
+                  </re-captcha> -->
+                </div> 
+                 <!-- <div [hidden]="!captcha"> 
+                    <p>{{ email }}</p>
+                </div><br> -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary me-2" >Login</button>
+                <p>If you are new user</p>
+                <p><a class="nav-link active" [routerLink]="['/registration']" style="color: green;">Click here For Register</a> </p>
+                <!-- <button  [disabled]="!captchaResolved" type="submit" class="btn btn-primary me-2"  >Login</button>  -->
+            </div>
+            <p class="text-danger">{{errorMessage}}</p>
+
+        </form>
+    </div>
+</div>
+</div>
